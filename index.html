@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Congestion Control Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Network Congestion Control Simulator</h1>
+    <p>Explore network traffic, packet loss and congestion control</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Simulation Settings</h2>
+
+      <form id="simulationForm">
+        <label for="mode">Simulation Mode</label>
+        <select id="mode">
+          <option value="tcp">With Congestion Control</option>
+          <option value="none">Without Congestion Control</option>
+        </select>
+
+        <label for="steps">Simulation Steps</label>
+        <input id="steps" type="number" min="5" max="200" value="40">
+
+        <label for="bufferSize">Router Buffer Size</label>
+        <input id="bufferSize" type="number" min="5" max="100" value="20">
+
+        <label for="linkCapacity">Link Capacity</label>
+        <input id="linkCapacity" type="number" min="1" max="30" value="5">
+
+        <label for="randomLoss">Random Packet Loss (%)</label>
+        <input id="randomLoss" type="number" min="0" max="30" step="0.5" value="2">
+
+        <button type="submit" id="runButton">Run Simulation</button>
+        <button type="button" id="compareButton">Compare Both Modes</button>
+      </form>
+
+      <p id="statusMessage">Start the Java server first.</p>
+    </section>
+
+    <section class="metrics">
+      <article class="metric">
+        <h3>Packets Offered</h3>
+        <p id="totalSent">—</p>
+      </article>
+      <article class="metric">
+        <h3>Packets Received</h3>
+        <p id="totalReceived">—</p>
+      </article>
+      <article class="metric">
+        <h3>Packets Dropped</h3>
+        <p id="totalDropped">—</p>
+      </article>
+      <article class="metric">
+        <h3>Packet Loss Rate</h3>
+        <p id="lossRate">—</p>
+      </article>
+      <article class="metric">
+        <h3>Average Throughput</h3>
+        <p id="throughput">—</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Congestion Window</h2>
+      <canvas id="cwndChart" height="240"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Router Queue</h2>
+      <canvas id="queueChart" height="240"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Comparison Results</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>With Control</th>
+              <th>Without Control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Packets Offered</td><td id="tcpSent">—</td><td id="noneSent">—</td></tr>
+            <tr><td>Packets Received</td><td id="tcpReceived">—</td><td id="noneReceived">—</td></tr>
+            <tr><td>Packets Dropped</td><td id="tcpDropped">—</td><td id="noneDropped">—</td></tr>
+            <tr><td>Loss Rate</td><td id="tcpLoss">—</td><td id="noneLoss">—</td></tr>
+            <tr><td>Throughput</td><td id="tcpThroughput">—</td><td id="noneThroughput">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Educational simulation of TCP-style congestion control.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
